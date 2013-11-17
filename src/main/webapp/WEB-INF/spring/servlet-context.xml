@@ -30,5 +30,6 @@
 	
 	<!-- Scans the package for Controller annotations -->
 	<context:component-scan base-package="com.ssb.web.controllers" />
+	<context:component-scan base-package="com.ssb.web.model" />
 	
 </beans:beans>
