@@ -2,21 +2,29 @@ package com.ssb.web.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssb.web.data.FighterDAO;
+import com.ssb.web.model.Fighter;
 import com.ssb.web.model.Foo;
 
 @Controller
 public class TestController {
 
+	@Autowired
+	FighterDAO fighterDao;
+	
 	@RequestMapping(value = {"/index.json","/index.xml"})
-	public @ResponseBody Foo hellowWorld(HttpServletRequest request) {
+	public @ResponseBody Fighter hellowWorld(HttpServletRequest request) {
 		Foo myFoo = new Foo("spring", "rocks");
 		
-		return myFoo;
+		Fighter fighter = fighterDao.findByName("Fox");
+		
+		return fighter;
 	}
 	
 	@RequestMapping(value = "/index.html")
