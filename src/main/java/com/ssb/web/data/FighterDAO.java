@@ -25,6 +25,18 @@ public class FighterDAO {
 		});
 	}
 	
+	public void updateWins(Fighter fighter){
+		 
+		String sql = "UPDATE CHARACTERS " +
+			"SET WINS = ? WHERE NAME = ?";
+ 
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
+ 
+		jdbcTemplate.update(sql, new Object[] { fighter.getWins(),
+				fighter.getName()  
+		});
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Fighter findByName(String name){
 		 
