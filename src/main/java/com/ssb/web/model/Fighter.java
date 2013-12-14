@@ -3,18 +3,22 @@ package com.ssb.web.model;
 public class Fighter {
 
 	String name;
-	int wins;
+	int careerWins;
 	int matchesPlayed;
+	char isRestricted;
+	int restrictedYear;
 	
 	public Fighter() {
 		
 	}
 	
-	public Fighter(String name, int wins, int matchesPlayed) {
+	public Fighter(String name, int careerWins, int matchesPlayed, char isRestricted, int restrictedYear) {
 		
 		this.name = name;
-		this.wins = wins;
+		this.careerWins = careerWins;
 		this.matchesPlayed = matchesPlayed;
+		this.isRestricted = isRestricted;
+		this.restrictedYear = restrictedYear;
 	}
 	
 	public String getName() {
@@ -25,12 +29,12 @@ public class Fighter {
 		this.name = name;
 	}
 
-	public int getWins() {
-		return wins;
+	public int getCareerWins() {
+		return careerWins;
 	}
 
-	public void setWins(int wins) {
-		this.wins = wins;
+	public void setCareerWins(int careerWins) {
+		this.careerWins = careerWins;
 	}
 
 	public int getMatchesPlayed() {
@@ -39,5 +43,21 @@ public class Fighter {
 
 	public void setMatchesPlayed(int matchesPlayed) {
 		this.matchesPlayed = matchesPlayed;
+	}
+
+	public char isRestricted() {
+		return isRestricted;
+	}
+
+	public void setRestricted(char isRestricted) {
+		this.isRestricted = isRestricted;
+	}
+
+	public int getRestrictedYear() {
+		return restrictedYear;
+	}
+
+	public void setRestrictedYear(int restrictedYear) {
+		this.restrictedYear = restrictedYear;
 	}
 }

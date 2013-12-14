@@ -17,6 +17,7 @@ public class TestController {
 	@Autowired
 	FighterDAO fighterDao;
 	
+	// get all information for the given fighter
 	@RequestMapping(value = "/get/{name}", method = RequestMethod.GET)
 	public @ResponseBody Fighter getByName(@PathVariable String name) {
 		
@@ -24,19 +25,15 @@ public class TestController {
 		return fighter;
 	}
 	
-	@RequestMapping(value = "/updateWins/{name}", method = RequestMethod.GET)
-	public @ResponseBody int updateWins(@PathVariable String name) {
+	// updates the 
+	@RequestMapping(value = "/updateWins/{year}/{name}", method = RequestMethod.GET)
+	public @ResponseBody int updateWins(@PathVariable String year, @PathVariable String name) {
 		
 		Fighter fighter = fighterDao.findByName(name);		
-		fighter.setWins(fighter.getWins() + 1);
+		fighter.setCareerWins(fighter.getCareerWins() + 1);
 		fighterDao.updateWins(fighter);
 		
-		return fighter.getWins();
+		return fighter.getCareerWins();
 	}
 	
-	/*@RequestMapping(value = "/post.json", method = RequestMethod.POST)
-	public @ResponseBody void insertTest(@RequestBody final  Fighter fighter) {
-		
-		fighterDao.insert(fighter);
-	}	*/
 }
