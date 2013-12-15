@@ -10,8 +10,8 @@ import org.springframework.jdbc.core.RowMapper;
 import com.ssb.web.model.Fighter;
  
 @SuppressWarnings("rawtypes")
-public class FighterRowMapper implements RowMapper
-{
+public class FighterRowMapper implements RowMapper {
+	
 	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
 		Fighter fighter = new Fighter();
@@ -28,10 +28,10 @@ public class FighterRowMapper implements RowMapper
 		ResultSetMetaData rsMetaData = rs.getMetaData();
 		int numberOfColumns = rsMetaData.getColumnCount();
 
-		// get the column names; column indexes start from 1
+		// loop through all the columns in the table 
 		for (int i = 1; i < numberOfColumns + 1; i++) {
 		    String columnName = rsMetaData.getColumnName(i);
-		    // Get the name of the column's table name
+		    // check if the column name is one of the year*_ columns
 		    if (columnName.contains("_owner")) {
 		        owners.add(rs.getString(columnName));
 		    }

@@ -4,26 +4,28 @@ import java.util.ArrayList;
 
 public class Fighter {
 
-	String name;
-	int careerWins;
-	int matchesPlayed;
-	String isRestricted;
-	int restrictedYear;
-	ArrayList<String> ownersThroughTheYears;
-	ArrayList<Integer> winsThroughTheYears;
-	ArrayList<Float> salariesThroughTheYears;
+	private String name;
+	private int careerWins;
+	private int matchesPlayed;
+	private String isRestricted;
+	private int restrictedYear;
+	private ArrayList<String> ownersThroughTheYears;
+	private ArrayList<Integer> winsThroughTheYears;
+	private ArrayList<Float> salariesThroughTheYears;
 	
-	public Fighter() {
-		
-	}
+	public Fighter() {}
 	
-	public Fighter(String name, int careerWins, int matchesPlayed, String isRestricted, int restrictedYear) {
+	public Fighter(String name, int careerWins, int matchesPlayed, String isRestricted, int restrictedYear, ArrayList<String> ownersThroughTheYears,
+			ArrayList<Integer> winsThroughTheYears, ArrayList<Float> salariesThroughTheYears) {
 		
 		this.name = name;
 		this.careerWins = careerWins;
 		this.matchesPlayed = matchesPlayed;
 		this.isRestricted = isRestricted;
 		this.restrictedYear = restrictedYear;
+		this.ownersThroughTheYears = ownersThroughTheYears;
+		this.winsThroughTheYears = winsThroughTheYears;
+		this.salariesThroughTheYears = salariesThroughTheYears;
 	}
 	
 	public String getName() {
@@ -57,7 +59,7 @@ public class Fighter {
 	public void setIsRestricted(String isRestricted) {
 		this.isRestricted = isRestricted;
 	}
-	
+
 	public int getRestrictedYear() {
 		return restrictedYear;
 	}
@@ -89,6 +91,4 @@ public class Fighter {
 	public void setSalariesThroughTheYears(ArrayList<Float> salariesThroughTheYears) {
 		this.salariesThroughTheYears = salariesThroughTheYears;
 	}
-	
-	
 }
