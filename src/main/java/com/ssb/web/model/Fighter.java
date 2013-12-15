@@ -1,18 +1,23 @@
 package com.ssb.web.model;
 
+import java.util.ArrayList;
+
 public class Fighter {
 
 	String name;
 	int careerWins;
 	int matchesPlayed;
-	char isRestricted;
+	String isRestricted;
 	int restrictedYear;
+	ArrayList<String> ownersThroughTheYears;
+	ArrayList<Integer> winsThroughTheYears;
+	ArrayList<Float> salariesThroughTheYears;
 	
 	public Fighter() {
 		
 	}
 	
-	public Fighter(String name, int careerWins, int matchesPlayed, char isRestricted, int restrictedYear) {
+	public Fighter(String name, int careerWins, int matchesPlayed, String isRestricted, int restrictedYear) {
 		
 		this.name = name;
 		this.careerWins = careerWins;
@@ -45,14 +50,14 @@ public class Fighter {
 		this.matchesPlayed = matchesPlayed;
 	}
 
-	public char isRestricted() {
+	public String getIsRestricted() {
 		return isRestricted;
 	}
 
-	public void setRestricted(char isRestricted) {
+	public void setIsRestricted(String isRestricted) {
 		this.isRestricted = isRestricted;
 	}
-
+	
 	public int getRestrictedYear() {
 		return restrictedYear;
 	}
@@ -60,4 +65,30 @@ public class Fighter {
 	public void setRestrictedYear(int restrictedYear) {
 		this.restrictedYear = restrictedYear;
 	}
+
+	public ArrayList<String> getOwnersThroughTheYears() {
+		return ownersThroughTheYears;
+	}
+
+	public void setOwnersThroughTheYears(ArrayList<String> ownersThroughTheYears) {
+		this.ownersThroughTheYears = ownersThroughTheYears;
+	}
+
+	public ArrayList<Integer> getWinsThroughTheYears() {
+		return winsThroughTheYears;
+	}
+
+	public void setWinsThroughTheYears(ArrayList<Integer> winsThroughTheYears) {
+		this.winsThroughTheYears = winsThroughTheYears;
+	}
+
+	public ArrayList<Float> getSalariesThroughTheYears() {
+		return salariesThroughTheYears;
+	}
+
+	public void setSalariesThroughTheYears(ArrayList<Float> salariesThroughTheYears) {
+		this.salariesThroughTheYears = salariesThroughTheYears;
+	}
+	
+	
 }

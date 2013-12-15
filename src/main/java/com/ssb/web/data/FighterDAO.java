@@ -3,7 +3,6 @@ package com.ssb.web.data;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.ssb.web.model.Fighter;
@@ -14,12 +13,12 @@ public class FighterDAO {
 	@Autowired
 	private DataSource dataSource;	
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked" })
 	public Fighter findByName(String name){
 		 
 		String sql = "SELECT * FROM FIGHTERS WHERE NAME = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 		
-		Fighter fighter = (Fighter) jdbcTemplate.queryForObject(sql, new Object[] { name }, new BeanPropertyRowMapper(Fighter.class));
+		Fighter fighter = (Fighter) jdbcTemplate.queryForObject(sql, new Object[] { name }, new FighterRowMapper());
 	 
 		return fighter;
 	}
