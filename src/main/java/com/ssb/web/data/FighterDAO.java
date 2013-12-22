@@ -13,6 +13,7 @@ public class FighterDAO {
 	@Autowired
 	private DataSource dataSource;	
 	
+	// retrieve all data related to the specified fighter from the database
 	@SuppressWarnings({ "unchecked" })
 	public Fighter findByName(String name){
 		 
@@ -23,6 +24,7 @@ public class FighterDAO {
 		return fighter;
 	}
 	
+	// update the career wins column of the fighter table for the specified fighter
 	public void updateCareerWins(Fighter fighter){
 		 
 		String sql = "UPDATE FIGHTERS SET CAREER_WINS = ? WHERE NAME = ?";
@@ -30,6 +32,7 @@ public class FighterDAO {
 		jdbcTemplate.update(sql, new Object[] { fighter.getCareerWins(), fighter.getName() });
 	}
 	
+	// retrieve the number of wins for the specified fighter and year
 	public Integer getWinsByYear(int year, String name) {		
 		
 		String yearString = DatabaseUtils.getYearColumn(year);
@@ -40,12 +43,12 @@ public class FighterDAO {
 		return wins;
 	}
 		
-	public void updateWinsByYear(int year, int wins, String name) {
+	// update the wins column for the specified fighter and year
+	public void updateWinsByYear(Fighter fighter, int year) {
 		
 		String yearString = DatabaseUtils.getYearColumn(year);
 		String sql = "UPDATE FIGHTERS SET " + yearString + " = ? WHERE NAME = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		jdbcTemplate.update(sql, new Object[] { wins, name });
+		jdbcTemplate.update(sql, new Object[] { fighter.getWinsThroughTheYears().get(year - 1), fighter.getName() });
 	}
-	
 }

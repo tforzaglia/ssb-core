@@ -1,5 +1,7 @@
 package com.ssb.web.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,18 +36,24 @@ public class RestController {
 	
 	// update yearly wins and career wins by 1 for the given fighter
 	@RequestMapping(value = "/updateWins/{year}/{name}", method = RequestMethod.GET)
-	public @ResponseBody int updateWins(@PathVariable int year, @PathVariable String name) {
+	public @ResponseBody Fighter updateWins(@PathVariable int year, @PathVariable String name) {
 		
 		// update career wins by 1
 		Fighter fighter = fighterDao.findByName(name);		
 		fighter.setCareerWins(fighter.getCareerWins() + 1);
+		
+		// update wins for the given year by 1
+		ArrayList<Integer> yearlyWinsArray = new ArrayList<Integer>();
+		yearlyWinsArray = fighter.getWinsThroughTheYears();
+		int newWinsForYear = yearlyWinsArray.get(year - 1) + 1;
+		yearlyWinsArray.set(year - 1, newWinsForYear);
+				
 		fighterDao.updateCareerWins(fighter);
+		fighterDao.updateWinsByYear(fighter, year);		
 		
-		// update yearly wins by 1
-		int winsForYear = fighterDao.getWinsByYear(year, name);
-		fighterDao.updateWinsByYear(year, winsForYear + 1, name);
-		
-		return winsForYear;
+		return fighter;
 	}
+	
+	
 		
 }
