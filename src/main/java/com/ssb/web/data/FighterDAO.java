@@ -55,4 +55,22 @@ public class FighterDAO {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
 		jdbcTemplate.update(sql, new Object[] { fighter.getRestrictedYear(), fighter.getName() });
 	}
+	
+	// update the owner column for the specified fighter and year
+	public void updateOwnerByYear(Fighter fighter, int year) {
+			
+		String yearString = "YEAR" + year + "_OWNER";
+		String sql = "UPDATE FIGHTERS SET " + yearString + " = ? WHERE NAME = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
+		jdbcTemplate.update(sql, new Object[] { fighter.getOwnersThroughTheYears().get(year - 1), fighter.getName() });
+	}
+	
+	// update the salary column for the specified fighter and year
+	public void updateSalaryByYear(Fighter fighter, int year) {
+				
+		String yearString = "YEAR" + year + "_SALARY";
+		String sql = "UPDATE FIGHTERS SET " + yearString + " = ? WHERE NAME = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
+		jdbcTemplate.update(sql, new Object[] { fighter.getSalariesThroughTheYears().get(year - 1), fighter.getName() });
+	}
 }

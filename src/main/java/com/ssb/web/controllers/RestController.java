@@ -32,6 +32,7 @@ public class RestController {
 				
 		Fighter fighter = fighterDao.findByName(name);
 		int careerWins = fighter.getCareerWins();
+		
 		return careerWins;
 	}
 	
@@ -42,7 +43,8 @@ public class RestController {
 		Fighter fighter = fighterDao.findByName(name);
 		ArrayList<Integer> yearlyWinsArray = new ArrayList<Integer>();
 		yearlyWinsArray = fighter.getWinsThroughTheYears();
-		int winsForYear = yearlyWinsArray.get(year - 1);		
+		int winsForYear = yearlyWinsArray.get(year - 1);	
+		
 		return winsForYear;
 	}
 	
@@ -72,6 +74,7 @@ public class RestController {
 					
 		Fighter fighter = fighterDao.findByName(name);
 		String isRestricted = fighter.getIsRestricted();
+		
 		return isRestricted;
 	}
 	
@@ -94,6 +97,7 @@ public class RestController {
 						
 		Fighter fighter = fighterDao.findByName(name);
 		int restrictedYear = fighter.getRestrictedYear();
+		
 		return restrictedYear;
 	}
 	
@@ -104,6 +108,62 @@ public class RestController {
 		Fighter fighter = fighterDao.findByName(name);
 		fighter.setRestrictedYear(restrictedYear);
 		fighterDao.updateRestrictedYear(fighter);
+		
+		return fighter;
+	}
+	
+	// get the owner for the given character and year
+	@RequestMapping(value = "/getOwner/{year}/{name}", method = RequestMethod.GET)
+	public @ResponseBody String getOwnerForYear(@PathVariable int year, @PathVariable String name) {
+				
+		Fighter fighter = fighterDao.findByName(name);
+		ArrayList<String> yearlyOwnersArray = new ArrayList<String>();
+		yearlyOwnersArray = fighter.getOwnersThroughTheYears();
+		String ownerForYear = yearlyOwnersArray.get(year - 1);	
+		
+		return ownerForYear;
+	}
+	
+	// update yearly owner for the given fighter and year
+	@RequestMapping(value = "/updateOwner/{year}/{name}/{owner}", method = RequestMethod.GET)
+	public @ResponseBody Fighter updateOwner(@PathVariable int year, @PathVariable String name, @PathVariable String owner) {
+			
+		Fighter fighter = fighterDao.findByName(name);					
+		ArrayList<String> yearlyOwnersArray = new ArrayList<String>();
+		yearlyOwnersArray = fighter.getOwnersThroughTheYears();		
+		
+		if(owner.equals("A") || owner.equals("P") || owner.equals("T")) {
+			yearlyOwnersArray.set(year - 1, owner);
+			fighterDao.updateOwnerByYear(fighter, year);
+		}
+							
+		return fighter;
+	}	
+	
+	// get the salary for the given character and year
+	@RequestMapping(value = "/getSalary/{year}/{name}", method = RequestMethod.GET)
+	public @ResponseBody float getSalaryForYear(@PathVariable int year, @PathVariable String name) {
+					
+		Fighter fighter = fighterDao.findByName(name);
+		ArrayList<Float> yearlySalariesArray = new ArrayList<Float>();
+		yearlySalariesArray = fighter.getSalariesThroughTheYears();
+		float salaryForYear = yearlySalariesArray.get(year - 1);		
+		
+		return salaryForYear;
+	}
+	
+	// update yearly salary for the given fighter and year
+	// NOTE: Need to have a trailing / when hitting the endpoint in order for the decimal point to be updated properly
+	@RequestMapping(value = "/updateSalary/{year}/{name}/{salary}", method = RequestMethod.GET)
+	public @ResponseBody Fighter updateSalary(@PathVariable int year, @PathVariable String name, @PathVariable float salary) {
+				
+		Fighter fighter = fighterDao.findByName(name);					
+		ArrayList<Float> yearlySalariesArray = new ArrayList<Float>();
+		yearlySalariesArray = fighter.getSalariesThroughTheYears();
+			
+		yearlySalariesArray.set(year - 1, salary);
+		fighterDao.updateSalaryByYear(fighter, year);
+								
 		return fighter;
 	}
 }
