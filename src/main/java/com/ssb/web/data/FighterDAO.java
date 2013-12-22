@@ -30,17 +30,6 @@ public class FighterDAO {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
 		jdbcTemplate.update(sql, new Object[] { fighter.getCareerWins(), fighter.getName() });
 	}
-	
-	// retrieve the number of wins for the specified fighter and year
-	public Integer getWinsByYear(int year, String name) {		
-		
-		String yearString = "YEAR" + year + "_WINS";
-		String sql = "SELECT " + yearString + " FROM FIGHTERS WHERE NAME = ?";
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		Integer wins = (Integer) jdbcTemplate.queryForObject(sql, new Object[] { name }, Integer.class);
-		
-		return wins;
-	}
 		
 	// update the wins column for the specified fighter and year
 	public void updateWinsByYear(Fighter fighter, int year) {
@@ -49,5 +38,21 @@ public class FighterDAO {
 		String sql = "UPDATE FIGHTERS SET " + yearString + " = ? WHERE NAME = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
 		jdbcTemplate.update(sql, new Object[] { fighter.getWinsThroughTheYears().get(year - 1), fighter.getName() });
+	}
+	
+	// update the restricted status of the specified fighter
+	public void updateRestrictedStatus(Fighter fighter) {
+		
+		String sql = "UPDATE FIGHTERS SET IS_RESTRICTED = ? WHERE NAME = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
+		jdbcTemplate.update(sql, new Object[] { fighter.getIsRestricted(), fighter.getName() });
+	}
+	
+	// update the restricted year for the specified fighter
+	public void updateRestrictedYear(Fighter fighter) {
+		
+		String sql = "UPDATE FIGHTERS SET RESTRICTED_YEAR = ? WHERE NAME = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
+		jdbcTemplate.update(sql, new Object[] { fighter.getRestrictedYear(), fighter.getName() });
 	}
 }
