@@ -33,6 +33,7 @@
 	 <!-- declare DAO beans -->
  	<beans:bean id="FighterDao" class="com.ssb.web.data.FighterDAO"></beans:bean>
  	<beans:bean id="OwnerDao" class="com.ssb.web.data.OwnerDAO"></beans:bean>
+ 	<beans:bean id="YearDao" class="com.ssb.web.data.YearDAO"></beans:bean>
 
  	<!-- declare datasource bean -->
  	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
