@@ -27,7 +27,7 @@ public class FighterController {
 		return fighter;
 	}
 	
-	// get the number of career wins for the given character
+	// get the number of career wins for the given fighter
 	@RequestMapping(value = "/getCareerWins/{name}", method = RequestMethod.GET)
 	public @ResponseBody int getCareerWins(@PathVariable String name) {
 				
@@ -37,7 +37,7 @@ public class FighterController {
 		return careerWins;
 	}
 	
-	// get the number of wins for the given character and year
+	// get the number of wins for the given fighter and year
 	@RequestMapping(value = "/getWins/{year}/{name}", method = RequestMethod.GET)
 	public @ResponseBody int getWinsForYear(@PathVariable int year, @PathVariable String name) {
 			
@@ -69,7 +69,7 @@ public class FighterController {
 		return fighter;
 	}
 	
-	// get the restricted status for the given character
+	// get the restricted status for the given fighter
 	@RequestMapping(value = "/getRestrictedStatus/{name}", method = RequestMethod.GET)
 	public @ResponseBody String getRestrictedStatus(@PathVariable String name) {
 					
@@ -79,7 +79,7 @@ public class FighterController {
 		return isRestricted;
 	}
 	
-	// set the given restricted status for the given character
+	// set the given restricted status for the given fighter
 	@RequestMapping(value = "/setRestrictedStatus/{name}/{restrictedStatus}", method = RequestMethod.GET)
 	public @ResponseBody Fighter setRestrictedStatus(@PathVariable String name, @PathVariable String restrictedStatus) {
 						
@@ -92,7 +92,7 @@ public class FighterController {
 		return fighter;
 	}
 	
-	// get the restricted year for the given character
+	// get the restricted year for the given fighter
 	@RequestMapping(value = "/getRestrictedYear/{name}", method = RequestMethod.GET)
 	public @ResponseBody int getRestrictedYear(@PathVariable String name) {
 						
@@ -102,7 +102,7 @@ public class FighterController {
 		return restrictedYear;
 	}
 	
-	// set the restricted year for the given character 
+	// set the restricted year for the given fighter 
 	@RequestMapping(value = "/setRestrictedYear/{name}/{restrictedYear}", method = RequestMethod.GET)
 	public @ResponseBody Fighter setRestrictedYear(@PathVariable String name, @PathVariable int restrictedYear) {
 		
@@ -113,7 +113,7 @@ public class FighterController {
 		return fighter;
 	}
 	
-	// get the owner for the given character and year
+	// get the owner for the given fighter and year
 	@RequestMapping(value = "/getOwner/{year}/{name}", method = RequestMethod.GET)
 	public @ResponseBody String getOwnerForYear(@PathVariable int year, @PathVariable String name) {
 				
@@ -141,7 +141,7 @@ public class FighterController {
 		return fighter;
 	}	
 	
-	// get the salary for the given character and year
+	// get the salary for the given fighter and year
 	@RequestMapping(value = "/getSalary/{year}/{name}", method = RequestMethod.GET)
 	public @ResponseBody float getSalaryForYear(@PathVariable int year, @PathVariable String name) {
 					

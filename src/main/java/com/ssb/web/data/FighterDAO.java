@@ -34,8 +34,8 @@ public class FighterDAO {
 	// update the wins column for the specified fighter and year
 	public void updateWinsByYear(Fighter fighter, int year) {
 		
-		String yearString = "YEAR" + year + "_WINS";
-		String sql = "UPDATE FIGHTERS SET " + yearString + " = ? WHERE NAME = ?";
+		String columnName = "YEAR" + year + "_WINS";
+		String sql = "UPDATE FIGHTERS SET " + columnName + " = ? WHERE NAME = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
 		jdbcTemplate.update(sql, new Object[] { fighter.getWinsThroughTheYears().get(year - 1), fighter.getName() });
 	}
@@ -59,8 +59,8 @@ public class FighterDAO {
 	// update the owner column for the specified fighter and year
 	public void updateOwnerByYear(Fighter fighter, int year) {
 			
-		String yearString = "YEAR" + year + "_OWNER";
-		String sql = "UPDATE FIGHTERS SET " + yearString + " = ? WHERE NAME = ?";
+		String columnName = "YEAR" + year + "_OWNER";
+		String sql = "UPDATE FIGHTERS SET " + columnName + " = ? WHERE NAME = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
 		jdbcTemplate.update(sql, new Object[] { fighter.getOwnersThroughTheYears().get(year - 1), fighter.getName() });
 	}
@@ -68,8 +68,8 @@ public class FighterDAO {
 	// update the salary column for the specified fighter and year
 	public void updateSalaryByYear(Fighter fighter, int year) {
 				
-		String yearString = "YEAR" + year + "_SALARY";
-		String sql = "UPDATE FIGHTERS SET " + yearString + " = ? WHERE NAME = ?";
+		String columnName = "YEAR" + year + "_SALARY";
+		String sql = "UPDATE FIGHTERS SET " + columnName + " = ? WHERE NAME = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
 		jdbcTemplate.update(sql, new Object[] { fighter.getSalariesThroughTheYears().get(year - 1), fighter.getName() });
 	}

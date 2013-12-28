@@ -32,7 +32,7 @@ public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 		    if (columnName.contains("_wins") && !columnName.contains("career")) {
 		        wins.add(rs.getInt(columnName));
 		    }
-		    else if (columnName.contains("_salary") && !columnName.contains("remaining")) {
+		    else if (columnName.contains("_total_salary")) {
 		    	salaries.add(rs.getFloat(columnName));
 		    }
 		    else if (columnName.contains("_salary_remaining")) {
