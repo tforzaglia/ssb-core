@@ -49,5 +49,4 @@ public class FighterRowMapper implements RowMapper {
 		
 		return fighter;
 	}
- 
 }

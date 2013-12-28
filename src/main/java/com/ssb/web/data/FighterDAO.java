@@ -23,7 +23,7 @@ public class FighterDAO {
 		return fighter;
 	}
 	
-	// update the career wins column of the fighter table for the specified fighter
+	// update the career wins column of the fighters table for the specified fighter
 	public void updateCareerWins(Fighter fighter){
 		 
 		String sql = "UPDATE FIGHTERS SET CAREER_WINS = ? WHERE NAME = ?";

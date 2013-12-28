@@ -13,7 +13,8 @@ import com.ssb.web.data.FighterDAO;
 import com.ssb.web.model.Fighter;
 
 @Controller
-public class RestController {
+@RequestMapping(value = "/fighter", method = RequestMethod.GET)
+public class FighterController {
 
 	@Autowired
 	FighterDAO fighterDao;
