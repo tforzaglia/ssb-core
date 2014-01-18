@@ -122,4 +122,30 @@ public class OwnerController {
 										
 		return owner;
 	}
+	
+	// get the lineup for the given owner and year
+	@RequestMapping(value = "/getLineup/{year}/{name}", method = RequestMethod.GET)
+	public @ResponseBody String getLineupForYear(@PathVariable int year, @PathVariable String name) {
+								
+		Owner owner = ownerDao.findByName(name);
+		ArrayList<String> lineupsArray = new ArrayList<String>();
+		lineupsArray = owner.getLineupsThroughTheYears();
+		String lineupForYear = lineupsArray.get(year - 1);		
+					
+		return lineupForYear;
+	}
+	
+	// update the lineup for the given owner and year 
+	@RequestMapping(value = "/updateLineup/{year}/{name}/{lineup}", method = RequestMethod.GET)
+	public @ResponseBody Owner updateLineup(@PathVariable int year, @PathVariable String name, @PathVariable String lineup) {
+						
+		Owner owner = ownerDao.findByName(name);					
+		ArrayList<String> lineupsArray = new ArrayList<String>();
+		lineupsArray = owner.getLineupsThroughTheYears();
+					
+		lineupsArray.set(year - 1, lineup);
+		ownerDao.updateLineupByYear(owner, year);
+										
+		return owner;
+	}
 }

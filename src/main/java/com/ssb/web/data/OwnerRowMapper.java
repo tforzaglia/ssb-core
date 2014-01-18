@@ -18,6 +18,7 @@ public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ArrayList<Integer> wins = new ArrayList<Integer>();
 		ArrayList<Float> salaries = new ArrayList<Float>();
 		ArrayList<Float> salariesRemaining = new ArrayList<Float>();
+		ArrayList<String> lineups = new ArrayList<String>();
 		
 		owner.setName(rs.getString("name"));
 		owner.setCareerWins(rs.getInt("career_wins"));
@@ -32,6 +33,9 @@ public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 		    if (columnName.contains("_wins") && !columnName.contains("career")) {
 		        wins.add(rs.getInt(columnName));
 		    }
+		    else if (columnName.contains("_lineup")) {
+		    	lineups.add(rs.getString(columnName));
+		    }
 		    else if (columnName.contains("_total_salary")) {
 		    	salaries.add(rs.getFloat(columnName));
 		    }
@@ -43,6 +47,7 @@ public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 		owner.setWinsThroughTheYears(wins);
 		owner.setSalariesThroughTheYears(salaries);
 		owner.setSalaryRemainingThroughTheYears(salariesRemaining);
+		owner.setLineupsThroughTheYears(lineups);
 		
 		return owner;
 	}

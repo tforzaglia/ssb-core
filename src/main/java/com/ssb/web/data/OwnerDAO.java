@@ -56,5 +56,14 @@ public class OwnerDAO {
 		String sql = "UPDATE OWNERS SET " + columnName + " = ? WHERE NAME = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
 		jdbcTemplate.update(sql, new Object[] { owner.getSalariesThroughTheYears().get(year - 1), owner.getName() });
-		}
+	}
+	
+	// update the lineup column for the specified owner and year
+	public void updateLineupByYear(Owner owner, int year) {
+							
+		String columnName = "YEAR" + year + "_LINEUP";
+		String sql = "UPDATE OWNERS SET " + columnName + " = ? WHERE NAME = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
+		jdbcTemplate.update(sql, new Object[] { owner.getLineupsThroughTheYears().get(year - 1), owner.getName() });
+	}
 }
