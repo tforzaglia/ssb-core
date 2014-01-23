@@ -19,9 +19,6 @@
     	<beans:property name="favorPathExtension" value="false" />
 	</beans:bean>
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
-
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/jsp/" />
@@ -33,16 +30,15 @@
 	<context:component-scan base-package="com.ssb.web.model" />
 	<context:component-scan base-package="com.ssb.web.data" />
 	
-	 <!-- declare beans -->
- 	<beans:bean id="FighterDao" class="com.ssb.web.data.FighterDAO">
- 	</beans:bean>
+	 <!-- declare DAO beans -->
+ 	<beans:bean id="FighterDao" class="com.ssb.web.data.FighterDAO"></beans:bean>
+ 	<beans:bean id="OwnerDao" class="com.ssb.web.data.OwnerDAO"></beans:bean>
+ 	<beans:bean id="YearDao" class="com.ssb.web.data.YearDAO"></beans:bean>
 
  	<!-- declare datasource bean -->
  	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
   		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-  		<beans:property name="url" value="jdbc:mysql://localhost:3306/SSB-DB" />
-  		<beans:property name="username" value="root" />
-  		<beans:property name="password" value="root" />
+  		<beans:property name="url" value="jdbc:mysql://localhost:3306/test" />
  	</beans:bean>
 	
 </beans:beans>

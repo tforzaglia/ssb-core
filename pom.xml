@@ -126,9 +126,9 @@
 		
 		<!-- Jackson JSON Mapping -->
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.12</version>
+    		<groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.12</version>
 		</dependency>
 		
 		<!-- MySQL driver -->

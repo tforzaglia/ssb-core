@@ -1,7 +1,13 @@
 package com.ssb.web.controllers;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssb.web.data.OwnerDAO;
+import com.ssb.web.model.Lineup;
 import com.ssb.web.model.Owner;
 
 @Controller
@@ -125,14 +132,26 @@ public class OwnerController {
 	
 	// get the lineup for the given owner and year
 	@RequestMapping(value = "/getLineup/{year}/{name}", method = RequestMethod.GET)
-	public @ResponseBody String getLineupForYear(@PathVariable int year, @PathVariable String name) {
+	public @ResponseBody Lineup getLineupForYear(@PathVariable int year, @PathVariable String name) throws JsonGenerationException, JsonMappingException, IOException {
 								
 		Owner owner = ownerDao.findByName(name);
 		ArrayList<String> lineupsArray = new ArrayList<String>();
 		lineupsArray = owner.getLineupsThroughTheYears();
-		String lineupForYear = lineupsArray.get(year - 1);		
-					
-		return lineupForYear;
+		String lineupForYear = lineupsArray.get(year - 1);
+			
+		/*StringWriter stringWriter = new StringWriter();
+		JsonFactory jsonfactory = new JsonFactory();		
+		JsonGenerator jsonGenerator = jsonfactory.createJsonGenerator(stringWriter);
+		jsonGenerator.writeStartObject();
+		jsonGenerator.writeStringField("lineup", lineupForYear);
+		jsonGenerator.writeEndObject();
+		jsonGenerator.close();		
+		 
+		return stringWriter.toString();*/
+		Lineup lineup = new Lineup();
+		lineup.setLineup(lineupForYear);
+		
+		return lineup;
 	}
 	
 	// update the lineup for the given owner and year 
