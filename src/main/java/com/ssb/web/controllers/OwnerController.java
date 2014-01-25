@@ -131,13 +131,23 @@ public class OwnerController {
 	}
 	
 	// get the lineup for the given owner and year
-	@RequestMapping(value = "/getLineup/{year}/{name}", method = RequestMethod.GET)
-	public @ResponseBody Lineup getLineupForYear(@PathVariable int year, @PathVariable String name) throws JsonGenerationException, JsonMappingException, IOException {
+	@RequestMapping(value = "/getLineup/{year}", method = RequestMethod.GET)
+	public @ResponseBody Lineup getLineupForYear(@PathVariable int year) throws JsonGenerationException, JsonMappingException, IOException {
 								
-		Owner owner = ownerDao.findByName(name);
-		ArrayList<String> lineupsArray = new ArrayList<String>();
-		lineupsArray = owner.getLineupsThroughTheYears();
-		String lineupForYear = lineupsArray.get(year - 1);
+		Owner ant = ownerDao.findByName("A");
+		Owner tom = ownerDao.findByName("T");
+		Owner peter = ownerDao.findByName("P");
+		
+		ArrayList<String> aLineupsArray = new ArrayList<String>();
+		ArrayList<String> tLineupsArray = new ArrayList<String>();
+		ArrayList<String> pLineupsArray = new ArrayList<String>();
+		
+		aLineupsArray = ant.getLineupsThroughTheYears();
+		String aLineupForYear = aLineupsArray.get(year - 1);
+		tLineupsArray = tom.getLineupsThroughTheYears();
+		String tLineupForYear = tLineupsArray.get(year - 1);
+		pLineupsArray = peter.getLineupsThroughTheYears();
+		String pLineupForYear = pLineupsArray.get(year - 1);
 			
 		/*StringWriter stringWriter = new StringWriter();
 		JsonFactory jsonfactory = new JsonFactory();		
@@ -149,7 +159,9 @@ public class OwnerController {
 		 
 		return stringWriter.toString();*/
 		Lineup lineup = new Lineup();
-		lineup.setLineup(lineupForYear);
+		lineup.setALineup(aLineupForYear);
+		lineup.setTLineup(tLineupForYear);
+		lineup.setPLineup(pLineupForYear);
 		
 		return lineup;
 	}
