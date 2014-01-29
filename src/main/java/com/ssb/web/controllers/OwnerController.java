@@ -1,13 +1,7 @@
 package com.ssb.web.controllers;
 
-import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssb.web.data.OwnerDAO;
 import com.ssb.web.model.Lineup;
 import com.ssb.web.model.Owner;
+import com.ssb.web.model.Salary;
 
 @Controller
 @RequestMapping(value = "/owner", method = RequestMethod.GET)
@@ -130,9 +125,29 @@ public class OwnerController {
 		return owner;
 	}
 	
-	// get the lineup for the given owner and year
+	// get the salary fields for all owners and the year
+	@RequestMapping(value = "/getAllSalary", method = RequestMethod.GET)
+	public @ResponseBody Salary getSalariesForYear() {
+								
+		Owner ant = ownerDao.findByName("A");
+		Owner tom = ownerDao.findByName("T");
+		Owner peter = ownerDao.findByName("P");
+		
+		Salary salary = new Salary();
+		salary.setaTotalSalary(ant.getSalariesThroughTheYears());
+		salary.setaSalaryRemaining(ant.getSalaryRemainingThroughTheYears());
+		salary.settTotalSalary(tom.getSalariesThroughTheYears());
+		salary.settSalaryRemaining(tom.getSalaryRemainingThroughTheYears());
+		salary.setpTotalSalary(peter.getSalariesThroughTheYears());
+		salary.setpSalaryRemaining(peter.getSalaryRemainingThroughTheYears());
+		
+		return salary;
+		
+	}
+	
+	// get the lineups for all owners and the given year
 	@RequestMapping(value = "/getLineup/{year}", method = RequestMethod.GET)
-	public @ResponseBody Lineup getLineupForYear(@PathVariable int year) throws JsonGenerationException, JsonMappingException, IOException {
+	public @ResponseBody Lineup getLineupsForYear(@PathVariable int year) {
 								
 		Owner ant = ownerDao.findByName("A");
 		Owner tom = ownerDao.findByName("T");
@@ -149,15 +164,6 @@ public class OwnerController {
 		pLineupsArray = peter.getLineupsThroughTheYears();
 		String pLineupForYear = pLineupsArray.get(year - 1);
 			
-		/*StringWriter stringWriter = new StringWriter();
-		JsonFactory jsonfactory = new JsonFactory();		
-		JsonGenerator jsonGenerator = jsonfactory.createJsonGenerator(stringWriter);
-		jsonGenerator.writeStartObject();
-		jsonGenerator.writeStringField("lineup", lineupForYear);
-		jsonGenerator.writeEndObject();
-		jsonGenerator.close();		
-		 
-		return stringWriter.toString();*/
 		Lineup lineup = new Lineup();
 		lineup.setALineup(aLineupForYear);
 		lineup.setTLineup(tLineupForYear);
