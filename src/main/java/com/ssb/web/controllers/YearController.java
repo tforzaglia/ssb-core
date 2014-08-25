@@ -33,6 +33,6 @@ public class YearController {
 	// update the winning owner for the given match of the given year
 	@RequestMapping(value = "/updateWinningOwner/{year}/{matchNumber}/{owner}", method = RequestMethod.GET)
 	public @ResponseBody void updateWinningOwnerMatchResult(@PathVariable int year, @PathVariable int matchNumber, @PathVariable String owner) {		
-		yearDao.updateWinningFighterForMatch(year, owner, matchNumber);
+		yearDao.updateWinningOwnerForMatch(year, owner, matchNumber);
 	}
 }
