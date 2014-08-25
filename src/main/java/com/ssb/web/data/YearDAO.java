@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.ssb.web.model.Fighter;
 import com.ssb.web.model.Year;
 
 public class YearDAO {
@@ -20,7 +19,6 @@ public class YearDAO {
 	// retrieve all data related to the specified year from the database
 	@SuppressWarnings({ "rawtypes" })
 	public Year findByYear(int year) {
-
 		String yearTable = "YEAR" + year;
 		String sql = "SELECT * FROM " + yearTable;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -45,11 +43,17 @@ public class YearDAO {
 		return yearObj;
 	}
 	
-	public void updateWinnersForMatch(int year, String fighter, String owner, int match) {
-		
+	public void updateWinningFighterForMatch(int year, String fighter, int match) {
 		String yearTable = "YEAR" + year;
-		String sql = "UPDATE " + yearTable + " SET CHARACTER_WINNER = ? , OWNER_WINNER = ? WHERE MATCH_NUMBER = ?";
+		String sql = "UPDATE " + yearTable + " SET CHARACTER_WINNER = ? WHERE MATCH_NUMBER = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		jdbcTemplate.update(sql, new Object[] { fighter, owner, match });
+		jdbcTemplate.update(sql, new Object[] { fighter, match });
+	}
+	
+	public void updateWinningOwnerForMatch(int year, String owner, int match) {
+		String yearTable = "YEAR" + year;
+		String sql = "UPDATE " + yearTable + " SET OWNER_WINNER = ? WHERE MATCH_NUMBER = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
+		jdbcTemplate.update(sql, new Object[] { owner, match });
 	}
 }
