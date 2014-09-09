@@ -35,4 +35,11 @@ public class YearController {
 	public @ResponseBody void updateWinningOwnerMatchResult(@PathVariable int year, @PathVariable int matchNumber, @PathVariable String owner) {		
 		yearDao.updateWinningOwnerForMatch(year, owner, matchNumber);
 	}
+	
+	// create new year table
+	@RequestMapping(value = "/createNewYear/{year}", method = RequestMethod.GET)
+	public @ResponseBody void updateWinningOwnerMatchResult(@PathVariable int year) {		
+		yearDao.createNewYear(year);
+		yearDao.createNewYearColumns(year);
+	}
 }

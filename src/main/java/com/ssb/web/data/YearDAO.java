@@ -56,4 +56,20 @@ public class YearDAO {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
 		jdbcTemplate.update(sql, new Object[] { owner, match });
 	}
+	
+	public void createNewYear(int year) {
+		String yearTable = "YEAR" + year;
+		String sql = "CREATE TABLE " + yearTable + " (`match` int(11) NOT NULL,`character_winner` text,`owner_winner` char(1) DEFAULT NULL,PRIMARY KEY (`match`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
+		jdbcTemplate.update(sql);
+	}
+	
+	public void createNewYearColumns(int year) {
+		String yearPrefix = "year" + year;
+		String sql = "ALTER TABLE FIGHTERS ADD COLUMN `" + yearPrefix + "_owner` TEXT NULL, " +
+					"ADD COLUMN `" + yearPrefix + "_wins` INT(11) NULL, " +
+					"ADD COLUMN `" + yearPrefix + "_salary` FLOAT NULL";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
+		jdbcTemplate.update(sql);
+	}
 }
