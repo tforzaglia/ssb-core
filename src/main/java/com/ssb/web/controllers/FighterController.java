@@ -22,15 +22,13 @@ public class FighterController {
 	// get all information for the given fighter
 	@RequestMapping(value = "/get/{name}", method = RequestMethod.GET)
 	public @ResponseBody Fighter getByName(@PathVariable String name) {
-		
 		Fighter fighter = fighterDao.findByName(name);		
 		return fighter;
 	}
 	
 	// get the number of career wins for the given fighter
 	@RequestMapping(value = "/getCareerWins/{name}", method = RequestMethod.GET)
-	public @ResponseBody int getCareerWins(@PathVariable String name) {
-				
+	public @ResponseBody int getCareerWins(@PathVariable String name) {	
 		Fighter fighter = fighterDao.findByName(name);
 		int careerWins = fighter.getCareerWins();
 		
@@ -40,7 +38,6 @@ public class FighterController {
 	// get the number of wins for the given fighter and year
 	@RequestMapping(value = "/getWins/{year}/{name}", method = RequestMethod.GET)
 	public @ResponseBody int getWinsForYear(@PathVariable int year, @PathVariable String name) {
-			
 		Fighter fighter = fighterDao.findByName(name);
 		ArrayList<Integer> yearlyWinsArray = new ArrayList<Integer>();
 		yearlyWinsArray = fighter.getWinsThroughTheYears();
@@ -52,7 +49,6 @@ public class FighterController {
 	// update yearly wins and career wins by 1 for the given fighter and year
 	@RequestMapping(value = "/updateWins/{year}/{name}", method = RequestMethod.GET)
 	public @ResponseBody Fighter updateWins(@PathVariable int year, @PathVariable String name) {
-		
 		// update career wins by 1
 		Fighter fighter = fighterDao.findByName(name);		
 		fighter.setCareerWins(fighter.getCareerWins() + 1);
@@ -72,7 +68,6 @@ public class FighterController {
 	// get the restricted status for the given fighter
 	@RequestMapping(value = "/getRestrictedStatus/{name}", method = RequestMethod.GET)
 	public @ResponseBody String getRestrictedStatus(@PathVariable String name) {
-					
 		Fighter fighter = fighterDao.findByName(name);
 		String isRestricted = fighter.getIsRestricted();
 		
@@ -82,7 +77,6 @@ public class FighterController {
 	// set the given restricted status for the given fighter
 	@RequestMapping(value = "/setRestrictedStatus/{name}/{restrictedStatus}", method = RequestMethod.GET)
 	public @ResponseBody Fighter setRestrictedStatus(@PathVariable String name, @PathVariable String restrictedStatus) {
-						
 		Fighter fighter = fighterDao.findByName(name);
 		if(restrictedStatus.equals("N") || restrictedStatus.equals("Y")) {
 			fighter.setIsRestricted(restrictedStatus);
@@ -94,8 +88,7 @@ public class FighterController {
 	
 	// get the restricted year for the given fighter
 	@RequestMapping(value = "/getRestrictedYear/{name}", method = RequestMethod.GET)
-	public @ResponseBody int getRestrictedYear(@PathVariable String name) {
-						
+	public @ResponseBody int getRestrictedYear(@PathVariable String name) {		
 		Fighter fighter = fighterDao.findByName(name);
 		int restrictedYear = fighter.getRestrictedYear();
 		
@@ -105,7 +98,6 @@ public class FighterController {
 	// set the restricted year for the given fighter 
 	@RequestMapping(value = "/setRestrictedYear/{name}/{restrictedYear}", method = RequestMethod.GET)
 	public @ResponseBody Fighter setRestrictedYear(@PathVariable String name, @PathVariable int restrictedYear) {
-		
 		Fighter fighter = fighterDao.findByName(name);
 		fighter.setRestrictedYear(restrictedYear);
 		fighterDao.updateRestrictedYear(fighter);
@@ -116,7 +108,6 @@ public class FighterController {
 	// get the owner for the given fighter and year
 	@RequestMapping(value = "/getOwner/{year}/{name}", method = RequestMethod.GET)
 	public @ResponseBody String getOwnerForYear(@PathVariable int year, @PathVariable String name) {
-				
 		Fighter fighter = fighterDao.findByName(name);
 		ArrayList<String> yearlyOwnersArray = new ArrayList<String>();
 		yearlyOwnersArray = fighter.getOwnersThroughTheYears();
@@ -127,8 +118,7 @@ public class FighterController {
 	
 	// update yearly owner for the given fighter and year
 	@RequestMapping(value = "/updateOwner/{year}/{name}/{owner}", method = RequestMethod.GET)
-	public @ResponseBody Fighter updateOwner(@PathVariable int year, @PathVariable String name, @PathVariable String owner) {
-			
+	public @ResponseBody Fighter updateOwner(@PathVariable int year, @PathVariable String name, @PathVariable String owner) {		
 		Fighter fighter = fighterDao.findByName(name);					
 		ArrayList<String> yearlyOwnersArray = new ArrayList<String>();
 		yearlyOwnersArray = fighter.getOwnersThroughTheYears();		
@@ -144,7 +134,6 @@ public class FighterController {
 	// get the salary for the given fighter and year
 	@RequestMapping(value = "/getSalary/{year}/{name}", method = RequestMethod.GET)
 	public @ResponseBody float getSalaryForYear(@PathVariable int year, @PathVariable String name) {
-					
 		Fighter fighter = fighterDao.findByName(name);
 		ArrayList<Float> yearlySalariesArray = new ArrayList<Float>();
 		yearlySalariesArray = fighter.getSalariesThroughTheYears();
@@ -157,7 +146,6 @@ public class FighterController {
 	// NOTE: Need to have a trailing / when hitting the endpoint in order for the decimal point to be updated properly
 	@RequestMapping(value = "/updateSalary/{year}/{name}/{salary}", method = RequestMethod.GET)
 	public @ResponseBody Fighter updateSalary(@PathVariable int year, @PathVariable String name, @PathVariable float salary) {
-				
 		Fighter fighter = fighterDao.findByName(name);					
 		ArrayList<Float> yearlySalariesArray = new ArrayList<Float>();
 		yearlySalariesArray = fighter.getSalariesThroughTheYears();
@@ -166,5 +154,14 @@ public class FighterController {
 		fighterDao.updateSalaryByYear(fighter, year);
 								
 		return fighter;
+	}
+	
+	@RequestMapping(value = "/getNumberOfYears", method = RequestMethod.GET)
+	public @ResponseBody int getNumberOfYears() {
+		Fighter fighter = fighterDao.findByName("Bowser");
+		ArrayList<Integer> yearlyWinsArray = new ArrayList<Integer>();
+		yearlyWinsArray = fighter.getWinsThroughTheYears();	
+		
+		return yearlyWinsArray.size();		
 	}
 }
