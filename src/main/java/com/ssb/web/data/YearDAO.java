@@ -66,10 +66,15 @@ public class YearDAO {
 	
 	public void createNewYearColumns(int year) {
 		String yearPrefix = "year" + year;
-		String sql = "ALTER TABLE FIGHTERS ADD COLUMN `" + yearPrefix + "_owner` TEXT NULL, " +
+		String fighterSql = "ALTER TABLE FIGHTERS ADD COLUMN `" + yearPrefix + "_owner` TEXT NULL, " +
 					"ADD COLUMN `" + yearPrefix + "_wins` INT(11) NULL, " +
 					"ADD COLUMN `" + yearPrefix + "_salary` FLOAT NULL";
+		String ownerSql = "ALTER TABLE OWNERS ADD COLUMN `" + yearPrefix + "_lineup` TEXT NULL, " +
+				"ADD COLUMN `" + yearPrefix + "_wins` INT(11) NULL, " +
+				"ADD COLUMN `" + yearPrefix + "_total_salary` FLOAT NULL, " +
+				"ADD COLUMN `" + yearPrefix + "_salary_remaining` FLOAT NULL";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		jdbcTemplate.update(sql);
+		jdbcTemplate.update(fighterSql);
+		jdbcTemplate.update(ownerSql);
 	}
 }
